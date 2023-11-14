@@ -79,7 +79,7 @@ class OidcAccessManager(
       val state = listOf(ctx.path(), ctx.queryString()).filterNotNull().joinToString("?")
       val authorizeEndpoint = "${configuration.oidcBaseUrl}authorize?response_type=${responseType}&client_id=${configuration.oidcClientId}&redirect_uri=${redirectUrl}&scope=${scopes}&state=${state}"
 
-      LOG.info("redirecting user to Auth0 for login.")
+      LOG.info("redirecting user to login.")
       ctx.status(HttpStatus.FOUND).header("Location", authorizeEndpoint)
    }
 
