@@ -76,7 +76,7 @@ class OidcAccessManager(
       val redirectUrl = setupRedirectURL(ctx, configuration.callbackPath)
       val scopes = "openid profile"
       val responseType = "code"
-      val state = listOf(ctx.path(), ctx.queryString()).filterNotNull().joinToString("?")
+      val state = listOfNotNull(ctx.path(), ctx.queryString()).joinToString("?")
       val authorizeEndpoint = "${configuration.oidcBaseUrl}authorize?response_type=${responseType}&client_id=${configuration.oidcClientId}&redirect_uri=${redirectUrl}&scope=${scopes}&state=${state}"
 
       LOG.info("redirecting user to login.")
