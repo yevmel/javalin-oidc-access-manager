@@ -31,14 +31,9 @@ data class OidcAccessManagerConfiguration(
 )
 
 class OidcAccessManager(
-   private val configuration: OidcAccessManagerConfiguration
+   private val configuration: OidcAccessManagerConfiguration,
+   private val unprotectedEndpoints: List<String>
 ) : AccessManager {
-   private val unprotectedEndpoints = listOf(
-      "/auth/callback",
-      "/auth/login",
-      "/debug/headers"
-   )
-
    private val jwkProvider: JwkProvider = JwkProviderBuilder(configuration.oidcBaseUrl).cached(true).build()
 
    override fun manage(handler: Handler, ctx: Context, routeRoles: Set<RouteRole>) {
