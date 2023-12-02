@@ -13,8 +13,6 @@ dependencies {
    // web
    implementation("io.javalin:javalin:5.6.3")
    implementation("org.slf4j:slf4j-simple:2.0.7")
-   implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
-   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.0")
 
    // auth
    implementation("com.auth0:jwks-rsa:0.22.1")

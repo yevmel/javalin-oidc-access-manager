@@ -40,7 +40,7 @@ class CodeCallbackHandler(
 
       ctx.cookie(Cookie(
          name = "id",
-         value = tokens.idToken,
+         value = tokens.id_token,
          secure = isRequestSecure(ctx),
          isHttpOnly = true
       ))
