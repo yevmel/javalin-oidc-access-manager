@@ -12,16 +12,10 @@ import io.javalin.http.HttpStatus
 import io.javalin.security.AccessManager
 import io.javalin.security.RouteRole
 import org.slf4j.LoggerFactory
-import java.lang.Exception
-import java.lang.IllegalArgumentException
 import java.security.PublicKey
 import java.security.interfaces.RSAPublicKey
 
 private val LOG = LoggerFactory.getLogger("oidc")
-
-data class User(
-   val username: String
-)
 
 data class OidcAccessManagerConfiguration(
    val oidcClientId: String,
@@ -50,9 +44,9 @@ class OidcAccessManager(
                val verifier = JWT.require(algorithm).withIssuer(configuration.oidcBaseUrl).build()
                val verifiedJWT = verifier.verify(jwt)
 
-               val username = verifiedJWT.getClaim("name").asString()
-               val user = User(username)
-               ctx.attribute("user", user)
+               verifiedJWT.claims.forEach { name, claim ->
+                  ctx.attribute("jwt.${name}", claim.asString())
+               }
 
                handler.handle(ctx)
             }
